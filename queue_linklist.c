@@ -23,7 +23,7 @@ void enq(int val){
     else{
         ptr->data=val;
         ptr->next=NULL;
-        if (f==NULL){ //speical condition 
+        if (f==NULL){ //special condition 
             f=r=ptr;
         }
         else{
