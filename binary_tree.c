@@ -22,6 +22,20 @@ void preorder_traversal(struct Node *root){
         preorder_traversal(root->right);
     }
 }
+void postorder_traversal(struct Node *root){
+    if (root!=NULL){
+        postorder_traversal(root->left);
+        postorder_traversal(root->right);
+        printf("%d ",root->data);
+    }
+}
+void inorder_traversal(struct Node *root){
+    if (root!=NULL){
+        inorder_traversal(root->left);
+        printf("%d ",root->data);
+        inorder_traversal(root->right);
+    }
+}
 
 int main(){
     struct Node *p=createNode(2);
@@ -47,5 +61,9 @@ int main(){
     p3->right=p6;
 
     preorder_traversal(p);
+    printf("\n");
+    postorder_traversal(p);
+    printf("\n");
+    inorder_traversal(p);
     return 0;
 }
