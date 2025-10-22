@@ -29,28 +29,47 @@ struct Node * inorderPredecessor(struct Node *root){
     return root;
 }
 struct Node *deletion(struct Node *root, int value){
-    if (root== NULL){
+    struct Node *iPre;
+
+    if (root == NULL)
         return NULL;
-    }
-    // search node to be deleted
+
+    // Search for node
     if (value < root->data){
-        root->left=deletion(root->left, value);
+        root->left = deletion(root->left, value);
     }
     else if (value > root->data){
-        root->right=deletion(root->right, value);
+        root->right = deletion(root->right, value);
     }
-    // make strategy to delete.
-    else{
-        if (root->left==NULL && root->right==NULL){
+    else {
+        // Node found
+        // Case 1: No child
+        if (root->left == NULL && root->right == NULL){
             free(root);
             return NULL;
         }
-        struct Node * iPre=inorderPredecessor(root);
-        root->data=iPre->data;
-        root->left=deletion(root->left, iPre->data);
+        // Case 2: Only right child
+        else if (root->left == NULL){
+            struct Node *temp = root->right;
+            free(root);
+            return temp;
+        }
+        // Case 3: Only left child
+        else if (root->right == NULL){
+            struct Node *temp = root->left;
+            free(root);
+            return temp;
+        }
+        // Case 4: Two children
+        else {
+            iPre = inorderPredecessor(root);
+            root->data = iPre->data;
+            root->left = deletion(root->left, iPre->data);
+        }
     }
     return root;
 }
+
 
 int main(){
     struct Node *p=createNode(5);
@@ -77,7 +96,7 @@ int main(){
 
     inorder_traversal(p);
     printf("\n");
-    deletion(p,7);
+    deletion(p,1);
     inorder_traversal(p);
     return 0;
 } 
