@@ -49,6 +49,13 @@ struct Node * rightRotate(struct Node * y){
 
     return x;
 }
+/*
+        y
+       / \
+      x   T3
+     / \
+    T1  T2
+*/
 
 struct Node * leftRotate(struct Node * x){
     struct Node *y = x->right;
@@ -62,6 +69,13 @@ struct Node * leftRotate(struct Node * x){
 
     return y;
 }
+/*
+        x
+       / \
+      T1  y
+         / \
+        T2  T3 
+*/
 
 struct Node * insertion(struct Node *node, int key){
     if (node == NULL)
